@@ -17,10 +17,10 @@ When enabled, the plugin:
 
 ```bash
 # Add the marketplace
-/plugin marketplace add adrianR84/claude-code-all-permissions-hook
+/plugin marketplace add adrianR84/claude-code-all-permissions
 
 # Install the plugin
-/plugin install all-permissions/claude-code-all-permissions-hook
+/plugin install all-permissions/claude-code-all-permissions
 
 # Reload plugins
 /reload-plugins
@@ -29,16 +29,16 @@ When enabled, the plugin:
 Or via CLI:
 
 ```bash
-claude plugin marketplace add adrianR84/claude-code-all-permissions-hook
-claude plugin install all-permissions/claude-code-all-permissions-hook
+claude plugin marketplace add adrianR84/claude-code-all-permissions
+claude plugin install all-permissions/claude-code-all-permissions
 claude plugin reload
 ```
 
 ### Session-only (no install)
 
 ```bash
-git clone https://github.com/adrianR84/claude-code-all-permissions-hook.git
-cd claude-code-all-permissions-hook
+git clone https://github.com/adrianR84/claude-code-all-permissions.git
+cd claude-code-all-permissions
 claude --plugin-dir .
 ```
 
@@ -145,4 +145,4 @@ Bash { command: "npm install" }
 
 ## Related
 
-For a simpler experience without security scanning, see the [claude-code-permissions-hook](https://github.com/adrianR84/claude-code-permissions-hook) plugin.
+For a simpler experience without security scanning, see the [claude-code-permissions](https://github.com/adrianR84/claude-code-permissions) plugin.
