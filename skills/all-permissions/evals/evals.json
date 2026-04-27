@@ -1,0 +1,20 @@
+{
+  "skill_name": "all-permissions",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "enable all-permissions mode",
+      "expected_output": "Runs toggle-scan.sh enable and confirms hook is enabled"
+    },
+    {
+      "id": 2,
+      "prompt": "disable the auto-approve hook",
+      "expected_output": "Runs toggle-scan.sh disable and confirms hook is disabled"
+    },
+    {
+      "id": 3,
+      "prompt": "is all-permissions currently enabled",
+      "expected_output": "Runs toggle-scan.sh status and reports current state"
+    }
+  ]
+}

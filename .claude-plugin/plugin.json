@@ -1,0 +1,10 @@
+{
+  "name": "plugin-template",
+  "description": "A template for creating Claude Code plugins",
+  "author": {
+    "name": "adrianR84"
+  },
+  "category": "development",
+  "repository": "https://github.com/adrianR84/plugin-template",
+  "keywords": ["template", "plugin", "starter"]
+}

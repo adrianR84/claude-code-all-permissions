@@ -1,0 +1,21 @@
+{
+  "name": "claude-code-plugin-template",
+  "owner": {
+    "name": "adrianR84"
+  },
+  "description": "A template for creating Claude Code plugins",
+  "plugins": [
+    {
+      "name": "plugin-template",
+      "source": "./",
+      "description": "A template for creating Claude Code plugins",
+      "author": {
+        "name": "adrianR84"
+      },
+      "category": "development",
+      "repository": "https://github.com/adrianR84/plugin-template",
+      "keywords": ["template", "plugin", "starter"],
+      "license": "MIT"
+    }
+  ]
+}

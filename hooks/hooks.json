@@ -1,0 +1,17 @@
+{
+  "description": "Auto-approve safe operations with prompt injection scanning",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f \"${CLAUDE_PLUGIN_ROOT}/.claude/hook-enabled\" ] && node ${CLAUDE_PLUGIN_ROOT}/scripts/scan-injections.js || exit 0",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
