@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "name": "claude-code-all-permissions",
   "owner": {
     "name": "adrianR84"
@@ -8,6 +8,7 @@
   "plugins": [
     {
       "name": "all-permissions",
+      "version": "1.0.2",
       "source": "./",
       "description": "Auto-approve safe tool calls while blocking prompt injections and other injection attacks",
       "author": {
