@@ -1,20 +1,21 @@
 {
-  "name": "claude-code-plugin-template",
+  "version": "1.0.1",
+  "name": "claude-code-all-permissions",
   "owner": {
     "name": "adrianR84"
   },
-  "description": "A template for creating Claude Code plugins",
+  "description": "Auto-approve tool calls after security scanning for prompt injections, path traversal, and other injection attacks",
   "plugins": [
     {
-      "name": "plugin-template",
+      "name": "all-permissions",
       "source": "./",
-      "description": "A template for creating Claude Code plugins",
+      "description": "Auto-approve safe tool calls while blocking prompt injections, path traversal, and other injection attacks",
       "author": {
         "name": "adrianR84"
       },
-      "category": "development",
-      "repository": "https://github.com/adrianR84/plugin-template",
-      "keywords": ["template", "plugin", "starter"],
+      "category": "security",
+      "repository": "https://github.com/adrianR84/claude-code-all-permissions",
+      "keywords": ["permissions", "security", "injection", "safety", "auto-approve"],
       "license": "MIT"
     }
   ]
