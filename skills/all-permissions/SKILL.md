@@ -7,7 +7,7 @@ description: Toggle all-permissions mode for auto-approving tool calls after sec
 
 ## Skill Description
 
-Toggle the all-permissions mode for this Claude Code plugin. When enabled, all tool calls are auto-approved after passing security scans for prompt injections, path traversal, and other injection attacks. When disabled, normal permission prompts occur.
+Toggle the all-permissions mode for this Claude Code plugin. When enabled, all tool calls are auto-approved after passing security scans for prompt injection patterns. When disabled, normal permission prompts occur.
 
 **Use this skill whenever the user wants to:**
 - Enable or disable auto-approve mode
@@ -53,17 +53,16 @@ The hook runs before each tool call and:
 
 ## Security Scanning
 
-**Blocks** tools containing:
-| Pattern | Threat |
-|---------|--------|
-| Long base64 strings | Hidden encoded instructions |
-| Shell metacharacters (`;\|&`$\`<>`) | Command injection |
-| Command substitution (`$(...)`) | Shell injection |
-| Path traversal (`../`) | File system access |
-| URL-encoded traversal (`%2E%2E`) | Obfuscated path attacks |
-| SQL patterns (`--`, `DROP`, `INSERT`) | SQL injection |
-| Role override (`system:`, `developer:`) | Prompt override |
-| Prompt injection keywords | Behavior override |
+**Blocks** tools containing prompt injection patterns:
+| Pattern | Example |
+|---------|---------|
+| `ignore` directive | `ignore all previous instructions` |
+| `disregard` directive | `disregard previous commands` |
+| `forget/clear` directive | `forget all previous` |
+| Role override | `system:`, `developer:` |
+| Jailbreak attempt | `new system prompt`, `new role instruction` |
+| Base64 encoded data | 40+ char base64 strings |
+| Hex-encoded characters | `\x48\x65\x6c\x6c\x6f` |
 
 **Note:** Tools with `ask` or `deny` in `settings.json` are not auto-approved even when this mode is enabled.
 

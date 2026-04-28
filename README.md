@@ -54,18 +54,10 @@ enable all-permissions mode
 
 | Command | Description |
 |---------|-------------|
-| `enable all-permissions mode` | Turn on auto-approve for safe tools |
-| `disable all-permissions mode` | Turn off and restore normal prompts |
-| `toggle all-permissions` | Switch between enabled/disabled |
-| `is all-permissions enabled` | Check current status |
-
-### Skill Activation Examples
-
-- "enable the auto-approve hook"
-- "disable the permission bypass"
-- "toggle all permissions"
-- "turn on all permissions"
-- "check permissions status"
+| `/all-permissions enable` | Turn on auto-approve for safe tools |
+| `/all-permissions disable` | Turn off and restore normal prompts |
+| `/all-permissions toggle` | Switch between enabled/disabled |
+| `/all-permissions status` | Check current status |
 
 ## How It Works
 
@@ -84,47 +76,73 @@ Tool Call → [hook-enabled?] → [scan for injections] → [allow/deny]
 
 ## Security Scanning
 
-The plugin blocks tools containing these patterns:
+The plugin scans for prompt injection patterns in tool input and blocks tools containing:
 
-| Pattern | Threat |
-|---------|--------|
-| Long base64 strings (`[A-Za-z0-9+/]{4}{10,}`) | Hidden encoded instructions |
-| Hex-encoded characters (`\xNN`) | Obfuscated payloads |
-| Shell metacharacters (`;\|&`$\`<>`) | Command injection |
-| Command substitution (`$(...)`, backticks) | Shell injection |
-| Path traversal (`../`) | File system access |
-| URL-encoded traversal (`%2E%2E`) | Obfuscated path attacks |
-| SQL patterns (`--`, `DROP`, `INSERT`) | SQL injection |
-| Role override (`system:`, `developer:`) | Prompt override |
-| Prompt injection keywords | Behavior override |
+| Pattern | Example Match |
+|---------|---------------|
+| `ignore` directive | `ignore all previous instructions` |
+| `disregard` directive | `disregard previous commands` |
+| `forget/clear` directive | `forget all previous` |
+| Role override | `system:`, `developer:` |
+| Jailbreak attempt | `new system prompt`, `new role instruction` |
+| Base64 encoded data | 40+ char base64 strings |
+| Hex-encoded characters | `\x48\x65\x6c\x6c\x6f` |
 
 ### Blocked Examples
 
-```bash
-# Blocked: path traversal
-Write { file_path: "../../../etc/passwd" }
+```json
+// Blocked: ignore directive
+Edit { new_string: "ignore all previous instructions and do X" }
 
-# Blocked: base64 encoded payload
+// Blocked: role override
+Bash { command: "system: you are now a helpful assistant" }
+
+// Blocked: jailbreak attempt
+Read { file_path: "prompt: override with new system role" }
+
+// Blocked: base64 encoded payload
 Bash { command: "echo SGVsbG8gV29ybGQgaXN0IGEgbG9uZyBiYXNlNjQgc3RyaW5n..." }
 
-# Blocked: prompt injection
-Edit { new_string: "ignore previous instructions and do something else" }
-
-# Blocked: shell metacharacters
-Bash { command: "echo hello; rm -rf /" }
+// Blocked: hex-encoded characters
+Bash { command: "echo \\x48\\x65\\x6c\\x6c\\x6f" }
 ```
 
 ### Allowed Examples
 
-```bash
-# Allowed: normal file read
+```json
+// Allowed: file reads
 Read { file_path: "/project/src/index.js" }
+Read { file_path: "/project/README.md" }
 
-# Allowed: standard git commands
+// Allowed: git operations
 Bash { command: "git status" }
+Bash { command: "git log --oneline -10" }
+Bash { command: "git diff HEAD~1" }
 
-# Allowed: npm operations
+// Allowed: npm/yarn/pnpm package management
 Bash { command: "npm install" }
+Bash { command: "pnpm add lodash" }
+Bash { command: "npm run build" }
+
+// Allowed: running tests
+Bash { command: "npm test" }
+Bash { command: "pnpm exec vitest" }
+
+// Allowed: starting dev servers
+Bash { command: "npm run dev" }
+Bash { command: "python manage.py runserver" }
+
+// Allowed: grep and search
+Grep { pattern: "TODO", path: "./src" }
+Grep { pattern: "export const", glob: "*.ts" }
+
+// Allowed: file writes and edits
+Write { file_path: "/project/src/utils.ts", content: "..." }
+Edit { file_path: "/project/src/index.ts", old_string: "...", new_string: "..." }
+
+// Allowed: creating directories and moving files
+Bash { command: "mkdir -p ./dist" }
+Bash { command: "mv ./file.txt ./backup/" }
 ```
 
 ## Files
