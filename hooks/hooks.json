@@ -1,5 +1,5 @@
 {
-  "description": "Auto-approve safe operations with prompt injection scanning",
+  "description": "Auto-approve operations after checking for prompt injections",
   "hooks": {
     "PreToolUse": [
       {
