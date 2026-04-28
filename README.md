@@ -90,7 +90,7 @@ The plugin scans for prompt injection patterns in tool input and blocks tools co
 
 ### Blocked Examples
 
-```json
+```js
 // Blocked: ignore directive
 Edit { new_string: "ignore all previous instructions and do X" }
 
@@ -109,7 +109,7 @@ Bash { command: "echo \\x48\\x65\\x6c\\x6c\\x6f" }
 
 ### Allowed Examples
 
-```json
+```js
 // Allowed: file reads
 Read { file_path: "/project/src/index.js" }
 Read { file_path: "/project/README.md" }
