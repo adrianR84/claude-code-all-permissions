@@ -4,12 +4,12 @@
   "owner": {
     "name": "adrianR84"
   },
-  "description": "Auto-approve tool calls after security scanning for prompt injections, path traversal, and other injection attacks",
+  "description": "Auto-approve tool calls after security scanning for prompt injections and other injection attacks",
   "plugins": [
     {
       "name": "all-permissions",
       "source": "./",
-      "description": "Auto-approve safe tool calls while blocking prompt injections, path traversal, and other injection attacks",
+      "description": "Auto-approve safe tool calls while blocking prompt injections and other injection attacks",
       "author": {
         "name": "adrianR84"
       },
