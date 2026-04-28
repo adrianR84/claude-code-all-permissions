@@ -160,7 +160,3 @@ Bash { command: "mv ./file.txt ./backup/" }
 
 - Node.js
 - Claude Code with plugin support
-
-## Related
-
-For a simpler experience without security scanning, see the [claude-code-permissions](https://github.com/adrianR84/claude-code-permissions) plugin.
