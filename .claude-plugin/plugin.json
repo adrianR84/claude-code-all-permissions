@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "name": "all-permissions",
   "description": "Auto-approve tool calls after security scanning for prompt injections",
   "author": {

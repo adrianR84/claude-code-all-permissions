@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "all-permissions",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "source": "./",
       "description": "Auto-approve safe tool calls while blocking prompt injections and other injection attacks",
       "author": {
