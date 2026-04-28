@@ -160,3 +160,7 @@ Bash { command: "mv ./file.txt ./backup/" }
 
 - Node.js
 - Claude Code with plugin support
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
